@@ -30,6 +30,10 @@ public class Player : MonoBehaviour
     {
         inputVec = value.Get<Vector2>();
     }
+    public void OnSpawn()
+    {
+        GameManager.instance.pool.Get(0);
+    }
 
     void LateUpdate()
     {

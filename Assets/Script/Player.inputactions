@@ -28,7 +28,16 @@
                     "name": "Fire",
                     "type": "Button",
                     "id": "a4776ca1-8480-46e1-8bb9-caa1b68a4293",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Spawn",
+                    "type": "Button",
+                    "id": "0b0efd1d-6ac4-45f6-a269-5ca0b615a828",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -252,6 +261,17 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9c924275-2ad2-437e-a35c-fe6471b0083f",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Spawn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
