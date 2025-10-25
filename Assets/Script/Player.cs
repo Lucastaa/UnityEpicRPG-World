@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     {
         Vector2 nextVec = inputVec * speed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + nextVec);
+        spriter.sortingOrder = 1;
     }
 
     void OnMove(InputValue value)
