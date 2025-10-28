@@ -66,10 +66,9 @@ public class EnemyAi : MonoBehaviour
                 }
                 break;
             case State.Attack:
-                // Neu khoang cach nguoi choi gan float attackRang thi thuc hien tan cong
 
-                motor.Attack();
-                motor.PlaySkillEffect();
+                motor.Attack(transform.position, attackRange);
+                motor.PlaySkillEffect(player.position);
 
                 if (Vector2.Distance(transform.position, player.position) > attackRange)
                 {
@@ -83,3 +82,5 @@ public class EnemyAi : MonoBehaviour
         return startPos + Random.insideUnitCircle * 3f;
     }
 }
+
+// Neu khoang cach nguoi choi gan float attackRang thi thuc hien tan cong

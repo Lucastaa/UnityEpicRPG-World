@@ -47,6 +47,6 @@ public abstract class SampleEnemy : MonoBehaviour
     {
         rb.linearVelocity = Vector2.zero;
     }
-    public abstract void Attack();
-    public abstract void PlaySkillEffect();
+    public abstract void Attack(Vector2 pos, float attackRange);
+    public abstract void PlaySkillEffect(Vector2 targetPos);
 }
