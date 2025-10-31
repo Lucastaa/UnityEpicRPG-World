@@ -42,25 +42,31 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Ground
+  - name: CollisionGround1
+    uniqueID: 1763565727
+    locked: 0
+  - name: Ground2
     uniqueID: 963865043
     locked: 0
-  - name: WalkInfont
+  - name: WalkInfont3
     uniqueID: 225792513
     locked: 0
-  - name: Collision
+  - name: Collision4
     uniqueID: 4005144627
     locked: 0
-  - name: Player
-    uniqueID: 1292774163
-    locked: 0
-  - name: WalkBehind
-    uniqueID: 521559691
-    locked: 0
-  - name: Decor
+  - name: Decor5
     uniqueID: 3258313299
     locked: 0
-  - name: Fix
+  - name: Player6
+    uniqueID: 1292774163
+    locked: 0
+  - name: WalkBehindLayer7
+    uniqueID: 1733231531
+    locked: 0
+  - name: WalkBehind8
+    uniqueID: 521559691
+    locked: 0
+  - name: Fix9
     uniqueID: 1165056107
     locked: 0
   m_RenderingLayers:

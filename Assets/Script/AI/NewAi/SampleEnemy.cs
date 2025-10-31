@@ -3,10 +3,10 @@ using UnityEngine;
 public abstract class SampleEnemy : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public Rigidbody2D rb; // Cap nhat o FireWeapon
+    public Rigidbody2D rb;
     public Animator anim;
 
-    private Vector2 lastPosition; // Cap nhat o FireWeapon
+    private Vector2 lastPosition;
     protected SpriteRenderer sr;
 
     protected virtual void Awake()
@@ -18,7 +18,6 @@ public abstract class SampleEnemy : MonoBehaviour
     }
     protected virtual void FixedUpdate()
     {
-        // Set bool if isWalking based on actual movement speed
         if (Vector2.Distance(rb.position, lastPosition) > 0.001f)
         {
             anim.SetBool("isWalking", true);
