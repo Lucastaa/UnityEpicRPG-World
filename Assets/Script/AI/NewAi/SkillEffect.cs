@@ -18,7 +18,10 @@ public class SkillEffect : MonoBehaviour
     }
     public void FixedUpdate()
     {
-        FlipX(target.position);
+        if (target != null)
+        {
+            FlipX(target.position);
+        }
     }
     public void SetUpSkill1HitBox()
     {

@@ -2,6 +2,9 @@ using UnityEngine;
 
 public abstract class SampleEnemy : MonoBehaviour
 {
+    public int maxHealth = 100;
+    int currentHealth;
+
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
     public Animator anim;
@@ -16,6 +19,10 @@ public abstract class SampleEnemy : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         lastPosition = rb.position;
     }
+    public virtual void Start()
+    {
+        currentHealth = maxHealth;
+    }
     protected virtual void FixedUpdate()
     {
         if (Vector2.Distance(rb.position, lastPosition) > 0.001f)
@@ -28,6 +35,18 @@ public abstract class SampleEnemy : MonoBehaviour
         }
 
         lastPosition = rb.position;
+    }
+    public virtual void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+    public virtual void Die()
+    {
+        Debug.Log("Enemy Died");
     }
     public virtual void MoveTo(Vector2 targetPos)
     {

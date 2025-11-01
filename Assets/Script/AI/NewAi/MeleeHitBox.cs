@@ -3,16 +3,18 @@ using UnityEngine;
 public class MeleeHitBox : MonoBehaviour
 {
     private bool active = false;
-    public float damage = 20f;
+    public int damage = 20;
 
     public void EnableHitBox() => active = true;
     public void DisableHitBox() => active = false;
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!active) { Debug.Log(active); return; }
-        if (collision.CompareTag("Player"))
+        if (!active) return;
+
+        var playerHealth = collision.GetComponent<Bandit>();
+        if (playerHealth != null)
         {
-            Debug.Log("Player Health " + (-damage));
+            playerHealth.TakeDamage(damage);
         }
     }
 }

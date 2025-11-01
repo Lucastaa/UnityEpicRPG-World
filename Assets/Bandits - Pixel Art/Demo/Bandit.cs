@@ -4,18 +4,21 @@ using UnityEngine.InputSystem;
 
 public class Bandit : MonoBehaviour
 {
-    private Vector2 inputVec;
+    public Vector2 inputVec;
     public Animator            m_animator;
     private Rigidbody2D         m_body2d;
     [SerializeField] float      m_speed = 4.0f;
-    
+    public int maxHealth = 100;
+    int currentHealth;
+
     public bool                m_combatIdle = false;
 
     // Use this for initialization
     void Start () {
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
-        // m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Bandit>(); //
+        
+        currentHealth = maxHealth;
     }
 	
 	// Update is called once per frame
@@ -119,5 +122,16 @@ public class Bandit : MonoBehaviour
             transform.localScale = new Vector3(flipX, 1, 1);
         }
     }
-    
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+    void Die()
+    {
+        Debug.Log("Player Died");
+    }
 }

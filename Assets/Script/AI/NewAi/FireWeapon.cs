@@ -17,8 +17,9 @@ public class FireWeapon : SampleEnemy
         //if (skillanimator == null)
         //   skillanimator = getcomponentinchildren<animator>();
     }
-    void Start()
+    public override void Start()
     {
+        base.Start();
         player = GameObject.FindWithTag("Player").transform;
     }
     public override void Attack(Vector2 pos, float attackRange)
@@ -28,19 +29,23 @@ public class FireWeapon : SampleEnemy
         if (Vector2.Distance(pos, player.position) < attackRange - 1f)
         {
             anim.SetTrigger("Attack2");
+
+            EnableHitbox();
+            Invoke(nameof(DisableHitbox), 0.3f);
         }
         else
         {
-            anim.SetTrigger("Attack");
+            anim.SetTrigger("Attack"); 
+
+            EnableHitbox();
+            Invoke(nameof(DisableHitbox), 0.3f);
         }
             
     }
-
     public void EnableHitbox()
     {
         meleeHitbox.EnableHitBox();
     }
-
     public void DisableHitbox()
     {
         meleeHitbox.DisableHitBox();
