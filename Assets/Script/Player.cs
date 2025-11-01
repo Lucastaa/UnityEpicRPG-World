@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance { get; private set; }
     Animator animator;
     
     public Vector2 inputVec;
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         spriter = GetComponent<SpriteRenderer>();
         scanner = GetComponent<Scanner>();
+        Instance = this;
     }
 
     // FixedUpdate duoc goi theo khoang thoi gian co dinh, tuy vao toc do khung hinh
@@ -45,5 +47,9 @@ public class Player : MonoBehaviour
         {
             spriter.flipX = inputVec.x < 0;
         }
+    }
+    public Vector3 GetPosition()
+    {
+        return transform.position;
     }
 }

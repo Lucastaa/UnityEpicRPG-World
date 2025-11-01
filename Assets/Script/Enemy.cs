@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float speed;
+    public float speed = 2f;
     public Rigidbody2D target;
 
     public float health;
@@ -13,9 +13,9 @@ public class Enemy : MonoBehaviour
     Rigidbody2D rigid;
     Collider2D coll;
     SpriteRenderer spriter;
-    WaitForFixedUpdate wait;    
+    WaitForFixedUpdate wait;
 
-    void Awake()
+    private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         coll = GetComponent<Collider2D>();
@@ -23,7 +23,6 @@ public class Enemy : MonoBehaviour
         anim = GetComponent<Animator>();
         wait = new WaitForFixedUpdate();
     }
-
     void FixedUpdate()
     {
         if (!isLive || anim.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
@@ -31,10 +30,22 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        Vector2 dirVec = target.position - rigid.position;
+        // MoveTo(target.position);
+    }
+    public void MoveTo(Vector2 position)
+    {
+        Vector2 dirVec = position - rigid.position;
         Vector2 nextVec = dirVec.normalized * speed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + nextVec);
         rigid.linearVelocity = Vector2.zero;
+    }
+    public void StopMoving()
+    {
+        if (rigid != null)
+        {
+            rigid.linearVelocity = Vector2.zero;
+            rigid.angularVelocity = 0f;
+        }
     }
     void LateUpdate()
     {
