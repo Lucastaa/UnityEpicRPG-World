@@ -17,7 +17,27 @@ public class MainUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public GameObject lookOff;
     public GameObject micOn;
     public GameObject micOff;
+    public GameObject pause;
+    public GameObject resume;
     public GameObject settingPanel;
+    public void PauseToggle()
+    {
+        if (pause != null && resume != null)
+        {
+            if (pause.activeSelf)
+            {
+                pause.SetActive(false);
+                resume.SetActive(true);
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                pause.SetActive(true);
+                resume.SetActive(false);
+                Time.timeScale = 1f;
+            }
+        }
+    }
     public void MicToggle()
     {
         if (micOn != null && micOff != null)
@@ -77,6 +97,13 @@ public class MainUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         else
         {
             settingPanel.SetActive(!settingPanel.activeSelf);
+            if (Time.timeScale == 1f)
+            {
+                Time.timeScale = 0f;
+            }else
+            {
+                Time.timeScale = 1f;
+            }
         }
     }
     public void OnPointerEnter(PointerEventData eventData)
