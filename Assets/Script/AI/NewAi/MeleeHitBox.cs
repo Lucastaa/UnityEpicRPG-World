@@ -32,7 +32,11 @@ public class MeleeHitBox : MonoBehaviour
 
         foreach (Collider2D player in hitPlayers)
         {
-            Debug.Log($"Player Hit for {damage} damage by {gameObject.name}");
+            var playerScript = player.GetComponent<Bandit>();
+            if (playerScript != null)
+            {
+                playerScript.Damage(damage);
+            }
         }
     }
 

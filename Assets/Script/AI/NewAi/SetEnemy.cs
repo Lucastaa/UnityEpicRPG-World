@@ -41,7 +41,6 @@ public class SetEnemy : AbstractEnemy
         {
             anim.SetTrigger("Attack");
         }
-            
     }
     public void EnableHitbox() => meleeHitbox.EnableHitBox();
     public void DisableHitbox() => meleeHitbox.DisableHitBox();

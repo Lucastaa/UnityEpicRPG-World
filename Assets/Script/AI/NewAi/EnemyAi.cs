@@ -67,11 +67,8 @@ public class EnemyAi : MonoBehaviour
                 }
                 break;
             case State.Attack:
-
-                // To set a new Vector2 with the player's position and add 0.45f to the Y value:
                 Vector2 targetPos = new Vector2(player.position.x, player.position.y + 0.45f);
 
-                // Example usage in your code:
                 motor.Attack(transform.position, attackRange);
                 motor.PlaySkillEffect(targetPos);
 
