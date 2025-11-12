@@ -52,8 +52,8 @@ public class SkillEffect : MonoBehaviour
         Destroy(gameObject, lifeTime);
     }
     private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (!canDamage) return;
+    {   
+        // if (!canDamage) return;
         if (collision.CompareTag("Player"))
         {
             // collision.GetComponent<PlayerHealth>()?.TakeDamage(damage);

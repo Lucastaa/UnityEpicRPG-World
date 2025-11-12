@@ -24,7 +24,6 @@ namespace CodeMonkey.HealthSystemCM {
                 SetHealthSystem(healthSystem);
             }
         }
-
         /// <summary>
         /// Set the Health System for this Health Bar
         /// </summary>
