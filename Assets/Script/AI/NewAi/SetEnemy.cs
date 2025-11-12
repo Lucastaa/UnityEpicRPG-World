@@ -43,8 +43,6 @@ public class SetEnemy : AbstractEnemy
             PlaySkillEffect(player.position);
         }
     }
-    public void EnableHitbox() => meleeHitbox.EnableHitBox();
-    public void DisableHitbox() => meleeHitbox.DisableHitBox();
     public override void PlaySkillEffect(Vector2 targetPos)
     {
         if (Time.time < lastSkillTime + skillCooldown) return;
@@ -76,4 +74,6 @@ public class SetEnemy : AbstractEnemy
             skill1Count = 0;
         }
     }
+    public void EnableHitbox() => meleeHitbox.EnableHitBox();
+    public void DisableHitbox() => meleeHitbox.DisableHitBox();
 }

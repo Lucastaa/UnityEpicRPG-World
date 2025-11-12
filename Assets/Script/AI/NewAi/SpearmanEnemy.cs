@@ -27,30 +27,30 @@ public class SpearmanEnemy : AbstractEnemy
     {
         float distance = Vector2.Distance(pos, player.position);
 
-        if (Time.time < lastAttackTime + attackCooldown && Time.time < lastSkillTime + skillCooldown) { return; }
-        
+        if (Time.time < lastAttackTime + attackCooldown && Time.time < lastSkillTime + skillCooldown) return;
         
         if (Time.time >= lastSkillTime + skillCooldown)
         {
             anim.SetTrigger("Attack2");
-            Debug.Log("Spin Attack Activated");
             StartCoroutine(SpinAttack());
+
             lastSkillTime = Time.time;
         }
         else if (Time.time >= lastAttackTime + attackCooldown)
         {
             anim.SetTrigger("Attack");
-            // Stop
+
             lastAttackTime = Time.time;
         }
     }
-    public void EnableHitbox() => meleeHitbox.EnableHitBox();
-    public void DisableHitbox() => meleeHitbox.DisableHitBox();
-    public override void PlaySkillEffect(Vector2 targetPos) { }
     private IEnumerator SpinAttack()
     {
         spinHitBox.enabled = true;
-        yield return new WaitForSeconds(attackCooldown);
+        yield return new WaitForSeconds(2f);
+
         spinHitBox.enabled = false;
     }
+    public void EnableAnimHitbox() => meleeHitbox.EnableHitBox();
+    public void DisableAnimHitbox() => meleeHitbox.DisableHitBox();
+    public override void PlaySkillEffect(Vector2 targetPos) { }
 }

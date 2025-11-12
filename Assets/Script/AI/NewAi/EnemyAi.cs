@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyAi : MonoBehaviour
 {
+    [SerializeField] private bool isMage = false;
+
     // Thiet lap State Machine
     private enum State
     {
@@ -21,11 +23,11 @@ public class EnemyAi : MonoBehaviour
     private Vector2 roamPos;
 
     // Tam trang thai
+    [Header("State Machine Property")]
     public Transform player;
     public float detectRange = 5f;
     public float loseRange = 8f;
     public float attackRange = 3f;
-    [SerializeField] private bool isMage = false;
     private void Awake()
     {
         motor = GetComponent<AbstractEnemy>();
@@ -48,9 +50,8 @@ public class EnemyAi : MonoBehaviour
                     roamPos = GetRoamPosition();
                 
                 if (Vector2.Distance(transform.position, player.position) < detectRange)
-                {
                     state = State.Chasing;
-                }
+
                 break;
 
             case State.Chasing:
@@ -62,30 +63,24 @@ public class EnemyAi : MonoBehaviour
                     roamPos = GetRoamPosition();
                 }
 
-                if (isMage)
+                if (isMage && Vector2.Distance(transform.position, player.position) < attackRange)
                 {
-                    if (Vector2.Distance(transform.position, player.position) < attackRange)
-                    {
                         state = State.Attack;
-                    }
                 }
-                else
+                else if (Vector2.Distance(transform.position, player.position) < attackRange - 2f)
                 {
-                    if (Vector2.Distance(transform.position, player.position) < attackRange - 2f)
-                    {
                         state = State.Attack;
-                    }
                 }
 
                 break;
             case State.Attack:
-                Vector2 targetPos = new Vector2(player.position.x, player.position.y + 0.45f);
-
                 motor.Attack(transform.position, attackRange);
+
                 if (Vector2.Distance(transform.position, player.position) > attackRange)
-                {
                     state = State.Chasing;
-                }
+                break;
+            case State.Dead:
+
                 break;
         }
     }
@@ -94,5 +89,3 @@ public class EnemyAi : MonoBehaviour
         return startPos + Random.insideUnitCircle * 3f;
     }
 }
-
-// Neu khoang cach nguoi choi gan float attackRang thi thuc hien tan cong

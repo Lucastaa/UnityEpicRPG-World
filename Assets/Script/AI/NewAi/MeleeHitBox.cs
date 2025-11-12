@@ -1,7 +1,6 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-[RequireComponent(typeof(Collider2D))]
 public class MeleeHitBox : MonoBehaviour
 {
     [Header("Hitbox Settings")]
@@ -24,20 +23,23 @@ public class MeleeHitBox : MonoBehaviour
     {
         if (!active) return;
 
-        Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(
-            attackPoint.position,
-            attackRange,
-            playerLayer
-        );
+        //Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(
+        //    attackPoint.position,
+        //    attackRange,
+        //    playerLayer
+        //);
 
-        foreach (Collider2D player in hitPlayers)
-        {
-            var playerScript = player.GetComponent<Bandit>();
-            if (playerScript != null)
-            {
-                playerScript.Damage(damage);
-            }
-        }
+        //foreach (Collider2D player in hitPlayers)
+        //{
+        //    var playerScript = player.GetComponent<Bandit>();
+        //    if (playerScript != null)
+        //    {
+        //        playerScript.Damage(damage);
+        //    }
+        //}
+
+        foreach (var player in Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer))
+            player.GetComponent<Bandit>()?.Damage(damage);
     }
 
     private void OnDrawGizmosSelected()
