@@ -19,8 +19,11 @@ Một tựa game hành động – nhập vai thế giới mở được tôi ph
 ## Folder Structure
 Assets
 ├── Scripts
+|
 │ ├── Player
+|
 │ ├── Enemy
+|
 │ ├── Combat
 │ └── UI
 ├── Prefabs
