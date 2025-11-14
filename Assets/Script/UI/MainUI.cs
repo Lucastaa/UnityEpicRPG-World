@@ -1,10 +1,14 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class MainUI : MonoBehaviour
 {
+    [Header("--------- First Selected Options ---------")]
+    public GameObject _mainMenuFirst;
+    public GameObject _settingsMenuFirst;
     [Header("--------- Audio Sources ---------")]
     public AudioManager audio;
     [Header("--------- Master Sound ---------")]
@@ -20,6 +24,10 @@ public class MainUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public GameObject pause;
     public GameObject resume;
     public GameObject settingPanel;
+
+    [Header("--------- Player Stop ---------")]
+    public Bandit _playerMove;
+    public BanditCombat _playerCombat;
     public void PauseToggle()
     {
         if (pause != null && resume != null)
@@ -29,12 +37,18 @@ public class MainUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 pause.SetActive(false);
                 resume.SetActive(true);
                 Time.timeScale = 0f;
+
+                _playerMove.enabled = false;
+                _playerCombat.enabled = false;
             }
             else
             {
                 pause.SetActive(true);
                 resume.SetActive(false);
                 Time.timeScale = 1f;
+
+                _playerMove.enabled = true;
+                _playerCombat.enabled = true;
             }
         }
     }
@@ -87,32 +101,31 @@ public class MainUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 musicObjOn.SetActive(true);
             }
         }
+
+        EventSystem.current.SetSelectedGameObject(_settingsMenuFirst);
     }
     public void Setting()
     {
         if (settingPanel == null)
         {
             settingPanel.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(_mainMenuFirst);
         } 
         else
         {
             settingPanel.SetActive(!settingPanel.activeSelf);
+
             if (Time.timeScale == 1f)
             {
                 Time.timeScale = 0f;
-            }else
+            }
+            else
             {
                 Time.timeScale = 1f;
             }
+
+            EventSystem.current.SetSelectedGameObject(null);
         }
-    }
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-
-    }
-    public void OnPointerExit(PointerEventData eventData)
-    {
-
     }
     public void SoundToggle()
     {
@@ -135,6 +148,18 @@ public class MainUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void PlayScene()
     {
         SceneManager.LoadScene("GamePlay");
+    }
+    public void Update()
+    {
+        if (InteractUI.instance != null && InteractUI.instance.MenuOpenCloseInput)
+        {
+            Setting();
+        }
+
+        if (InteractUI.instance != null && InteractUI.instance.PauseGameInput)
+        {
+            PauseToggle();
+        }
     }
     public void OnApplicationQuit()
     {

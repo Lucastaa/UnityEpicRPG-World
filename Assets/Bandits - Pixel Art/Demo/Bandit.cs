@@ -6,14 +6,11 @@ using CodeMonkey.HealthSystemCM;
 public class Bandit : MonoBehaviour, IGetHealthSystem
 {
     public Vector2 inputVec;
+    public bool                m_combatIdle = false;
     public Animator             m_animator;
     private Rigidbody2D         m_body2d;
     [SerializeField] float      m_speed = 4.0f;
     private HealthSystem        healthSystem;
-    // public int maxHealth = 100;
-    // int currentHealth;
-
-    public bool                m_combatIdle = false;
 
     private void Awake()
     {
@@ -24,8 +21,6 @@ public class Bandit : MonoBehaviour, IGetHealthSystem
     void Start () {
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
-        
-        // currentHealth = maxHealth;
     }
 	
 	// Update is called once per frame
@@ -108,14 +103,13 @@ public class Bandit : MonoBehaviour, IGetHealthSystem
     }
     void FixedUpdate()
     {
-        // Stop movement during attack
         if (m_animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
         {
             return;
         }
         Vector2 nextVec = inputVec * m_speed * Time.fixedDeltaTime;
         m_body2d.MovePosition(m_body2d.position + nextVec);
-        //Run
+
         if (Mathf.Abs(inputVec.x) > Mathf.Epsilon || Mathf.Abs(inputVec.y) > Mathf.Epsilon)
             m_animator.SetInteger("AnimState", 2);
         else if (m_combatIdle)
@@ -125,23 +119,12 @@ public class Bandit : MonoBehaviour, IGetHealthSystem
     }
     void LateUpdate()
     {
-        // m_animator.SetFloat("Speed", inputVec.magnitude);
-
         if (inputVec.x != 0)
         {
-            // Flip sprite on X axis based on movement direction
             float flipX = inputVec.x > 0 ? -1f : 1f;
             transform.localScale = new Vector3(flipX, 1, 1);
         }
     }
-    //public void TakeDamage(int damage)
-    //{
-    //    currentHealth -= damage;
-    //    if (currentHealth <= 0)
-    //    {
-    //        Die();
-    //    }
-    //}
     public void Damage(int damage)
     {
         healthSystem.Damage(40);
