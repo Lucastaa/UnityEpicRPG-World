@@ -15,6 +15,7 @@ public class InteractUI : MonoBehaviour
     {
         if (instance != null && instance != this)
         {
+            Debug.Log("instance == null");
             Destroy(gameObject);
             return;
         }

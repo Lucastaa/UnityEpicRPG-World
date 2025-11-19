@@ -1,8 +1,12 @@
 using UnityEngine;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public static event Action OnEnemyKilled;
+    public static event Action<int> OnPlayerLevelChange;
+
     public GameObject player;
     public PoolManager pool;
 
@@ -19,16 +23,21 @@ public class GameManager : MonoBehaviour
     public void IncreaseKill()
     {
         kill++;
-        GetExp();
+        GetExp(1);
+
+        OnEnemyKilled?.Invoke();
     }
-    public void GetExp()
+    public void GetExp(int amount)
     {
-        exp++;
+        exp += amount;
 
         if (exp >= nextExp[Mathf.Min(level, nextExp.Length - 1)])
         {
             level++;
             exp = 0;
+            GameEventsManager.instance.playerEvents.PlayerLevelChange(level);
+
+            // OnPlayerLevelChange?.Invoke(level);
         }
     }
 }

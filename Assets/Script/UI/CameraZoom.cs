@@ -20,7 +20,6 @@ public class CameraZoom : MonoBehaviour
         Vector2 lookValue = lookAction.action.ReadValue<Vector2>();
         float zoomInput = lookValue.y;
 
-        Debug.Log($"Zoom Input: {zoomInput}");
         if (Mathf.Abs(zoomInput) > 0.1f)
         {
             var lens = vcam.Lens;

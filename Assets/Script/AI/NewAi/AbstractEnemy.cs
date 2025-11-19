@@ -118,7 +118,7 @@ public abstract class AbstractEnemy : MonoBehaviour, IGetHealthSystem
         Stop();
 
         // Call game manager to increase kill count
-        NewMonoBehaviourScript.instance.IncreaseKill();
+        GameManager.instance.IncreaseKill();
         Destroy(gameObject, 1f);
     }
 

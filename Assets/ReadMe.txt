@@ -29,3 +29,8 @@ Trong tầm thì dùng dùng if và 1 biến distance để xác định
 
 BoxCollider2D làm xác định bị tấn công
 collider.gameObject.GetComponent<playerHealth>().health -=20;
+
+
+33:18
+35:19
+38:49

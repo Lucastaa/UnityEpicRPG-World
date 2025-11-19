@@ -17,19 +17,19 @@ public class HUD : MonoBehaviour
         switch (type)
         {
             case InfoType.Exp:
-                float curExp = NewMonoBehaviourScript.instance.exp;
-                float maxExp = NewMonoBehaviourScript.instance.nextExp[NewMonoBehaviourScript.instance.level];
+                float curExp = GameManager.instance.exp;
+                float maxExp = GameManager.instance.nextExp[GameManager.instance.level];
 
                 mySlider.value = curExp / maxExp;
                 break;
 
             case InfoType.Level:
-                myText.text = string.Format("Lv. {0:F0}", NewMonoBehaviourScript.instance.level);
+                myText.text = string.Format("Lv. {0:F0}", GameManager.instance.level);
 
                 break;
 
             case InfoType.Kill:
-                myText.text = string.Format("{0:F0}", NewMonoBehaviourScript.instance.kill);
+                myText.text = string.Format("{0:F0}", GameManager.instance.kill);
 
                 break;
 
